@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -29,11 +30,15 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::prefix('admin')->group(function () {
+    Route::get('/start', function () {
+        return view('admin.start');
+    });
+
     Route::get('/', function () {
         return view('admin.index');
     });
 
-    Route::get('products', function () {
-        return view('admin.products');
-    });
+    Route::resource('categories', CategoriesController::class)->only([
+        'index', 'show', 'update', 'store', 'destroy'
+    ]);
 });
