@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Kiotts;
+use Illuminate\Support\Str;
 class CategoriesController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +16,10 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        return view('admin.category');
+        $data = Category::all();
+        $htmlOption = Kiotts::selectOption($data);
+
+        return view('admin.category', compact('htmlOption'));
     }
 
     /**
@@ -34,7 +40,14 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $organization = Category::create([
+            'name' => $request->name,
+            'parent_id' => $request->parent_id,
+            'slug' => Str::slug($request->name),
+        ]);
+
+        return redirect()->route('categories.index');
+        // api: return $organization->fresh();
     }
 
     /**

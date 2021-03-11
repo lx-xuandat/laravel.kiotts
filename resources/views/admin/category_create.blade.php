@@ -10,11 +10,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
+                        @csrf
                         <div class="col-12">
                             <div class="form-group">
                                 <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Input with
                                     success</label>
-                                <input type="text" class="form-control is-valid" id="inputSuccess"
+                                <input type="text" class="form-control is-valid" id="inputSuccess" name="name"
                                     placeholder="Enter ...">
                             </div>
                         </div>
@@ -22,12 +23,8 @@
                             <!-- select -->
                             <div class="form-group">
                                 <label>Select</label>
-                                <select class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
+                                <select class="form-control"  name="parent_id">
+                                    {!! $htmlOption !!}
                                 </select>
                             </div>
                         </div>
@@ -35,7 +32,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Save changes</button>
+                    <button type="button" class="btn btn-success">Save changes</button>
                 </div>
             </div>
             <!-- /.modal-content -->
